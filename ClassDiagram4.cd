@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BaseEnemy">
+    <Position X="7.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Enemies\BaseEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="digger">
+    <Position X="9.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAEAAAAAAAAAAAAAAAAAIAAAAAgAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Enemies\digger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="enemyEntity">
+    <Position X="8.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAAiIgCAAgQAABAIgAAARIQAIIQEAGAAAgEQFEQA=</HashCode>
+      <FileName>Assets\Scripts\Game\Enemies\enemyEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Buffer">
+    <Position X="13" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEBAAAACAAAAAgAAEAAAAAAAAIAAEAIAAAgAABAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\Buffer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Canilla">
+    <Position X="19" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAgAAAAAAAAAAAAAAAAIAAAQAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\Canilla.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CarrotPlant">
+    <Position X="17" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIIBACAAAAAAAAAAAAAAIAAAUAAAAAQAAAAIAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\CarrotPlant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CarrotSeed">
+    <Position X="11" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAIAAAQAAAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\CarrotSeed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cube">
+    <Position X="15" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAIAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\Cube.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="enemyManager">
+    <Position X="21" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAACAAAAAgAAEAAAEAAAAIAAEAIAAAAAABIAA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\enemyManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Plant">
+    <Position X="17" Y="7" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Plant.GrowthState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Game\GameObjects\Plant.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAkAAIABECAAAAAgAABEAAAAIQBAAQgIQAAAgAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\Plant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PotatoSeed">
+    <Position X="21" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAIAAAQAAAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\PotatoSeed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Soil">
+    <Position X="23" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBQAAAASAAAAAAAACAAAAAIABAAAAAAAAAAAAAEEA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\Soil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TomatoSeed">
+    <Position X="13" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAIAAAQAAAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\GameObjects\TomatoSeed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DayNightCycle">
+    <Position X="11" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCQAEBAAAABAAAAAAAAAAAAAAgJAAAAAQAAAACAIEUE=</HashCode>
+      <FileName>Assets\Scripts\Game\Managers\DayNightCycle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interactable">
+    <Position X="17" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAIAAAAIAAQAAAEAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Managers\Interactable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interactor">
+    <Position X="15" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAAAAQAAAAAAAABAAAAABBAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\Managers\Interactor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item">
+    <Position X="15" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Managers\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenu">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Managers\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inventory">
+    <Position X="19" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAACAAACAACAACAAiAAAAAgABCAABEAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Game\Player\Inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>uAwEBAIAwiAAECAChQAERAAASIJIBQFIEGAAgARoEMA=</HashCode>
+      <FileName>Assets\Scripts\Game\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="enhanceDamage">
+    <Position X="17.75" Y="16" Width="1.5" />
+    <InheritanceLine Type="PowerUp" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="15.454" />
+        <Point X="20.25" Y="15.7" />
+        <Point X="18.75" Y="15.7" />
+        <Point X="18.75" Y="16" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAACAAAAAAAEAAQAAAAAAABAQBAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\PowerUps\enhanceDamage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PowerUp">
+    <Position X="19.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACIAACAAAAAAAAAAAAAAAAAAAAQIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\PowerUps\PowerUp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shield">
+    <Position X="19.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Game\PowerUps\Shield.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="speed">
+    <Position X="21.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAACAAAAAAAAAAUAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\PowerUps\speed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Acid">
+    <Position X="23.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Projectiles\Acid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bullet">
+    <Position X="25.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Projectiles\Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletEntity">
+    <Position X="26.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAoAAgAAAAAAAEAAAAAAAAQAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Projectiles\BulletEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Poison">
+    <Position X="27.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Projectiles\Poison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="strike">
+    <Position X="29.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Projectiles\strike.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UiText">
+    <Position X="23" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAEAAAAAAAAAAAAAAAAAAggCAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\UI\UiText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Repellent">
+    <Position X="12" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Weapons\Repellent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rifle">
+    <Position X="13.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Weapons\Rifle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scythe">
+    <Position X="15.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Weapons\Scythe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon">
+    <Position X="13.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAAAAAAAAAIQAAAMAAUAAAAAAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Game\Weapons\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
