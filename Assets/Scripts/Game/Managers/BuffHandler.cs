@@ -23,7 +23,8 @@ public class BuffHandler : MonoBehaviour
 
     private void EndingBuff(float buffDuration)
     {
-        print("empece");
+        
+    ("empece");
         Player player = FindObjectOfType<Player>();
 
         if (player.isSpeedBuffed)
