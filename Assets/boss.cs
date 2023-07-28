@@ -18,8 +18,18 @@ public class boss : MonoBehaviour
     [SerializeField] ListGenerator<Center> centerList = new ListGenerator<Center>();
     [SerializeField] ListGenerator<Side> sideList = new ListGenerator<Side>();
     [SerializeField] ListGenerator<Roar> roarList = new ListGenerator<Roar>();
+    public static boss instance;
+
     public void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
         durationRoar = 11f;
         durationInside = 6.66f;
         durationOutside = 7f;
@@ -34,18 +44,15 @@ public class boss : MonoBehaviour
 
 
 
-        // Crear un diccionario para almacenar habilidades
         Dictionary<string, Action> skillDictionary = new Dictionary<string, Action>();
 
-        // Definir las habilidades como acciones y agregarlas al diccionario
-        skillDictionary.Add("Fireball", () => Roar());
-        skillDictionary.Add("Ice Blast", () => SideRay());
-        skillDictionary.Add("Thunderbolt", () => InsideRay());
+        skillDictionary.Add("Roar", () => Roar());
+        skillDictionary.Add("SideRay", () => SideRay());
+        skillDictionary.Add("InsideRay", () => InsideRay());
 
-        // Llamar a las habilidades utilizando el diccionario
-        skillDictionary["Fireball"].Invoke();
-        skillDictionary["Ice Blast"].Invoke();
-        skillDictionary["Thunderbolt"].Invoke();
+        skillDictionary["Roar"].Invoke();
+        skillDictionary["SideRay"].Invoke();
+        skillDictionary["InsideRay"].Invoke();
     }
     public void Update()
     {
@@ -81,9 +88,6 @@ public class boss : MonoBehaviour
             state = durationRoar;
             bossAnim.SetTrigger("Roar");
             StartCoroutine(roarList.ActivateColliders());
-
-
-
         }
     }
     private void SideRay()
@@ -96,8 +100,6 @@ public class boss : MonoBehaviour
             state = durationOutside;
             bossAnim.SetTrigger("SideRay");
             StartCoroutine(sideList.ActivateColliders());
-
-
         }
     }
     private void InsideRay()
@@ -141,6 +143,7 @@ public class ListGenerator<T> where T : MonoBehaviour
     
     public IEnumerator ActivateColliders()
     {
+        yield return new WaitForSeconds(3f);
         foreach (T hitbox in hitboxes)
         {
             Collider collider = hitbox.GetComponent<Collider>();
@@ -148,8 +151,9 @@ public class ListGenerator<T> where T : MonoBehaviour
             {
                 collider.enabled = true;
             }
+
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.5f);
 
         foreach (T hitbox in hitboxes)
         {
@@ -158,9 +162,46 @@ public class ListGenerator<T> where T : MonoBehaviour
             {
                 collider.enabled = false;
             }
-            Debug.Log("holi");
         }
     }
-  
+    public class BossStats
+    {
+        private int damageRoar;
+        private int damageSideRay;
+        private int damageInsideRay;
+        private int health;
+
+        public int DamageRoar
+        {
+            get { return damageRoar; }
+            private set { damageRoar = Mathf.Max(0, value); }
+        }
+
+        public int DamageSideRay
+        {
+            get { return damageSideRay; }
+            private set { damageSideRay = Mathf.Max(0, value); }
+        }
+
+        public int DamageInsideRay
+        {
+            get { return damageInsideRay; }
+            private set { damageInsideRay = Mathf.Max(0, value); }
+        }
+
+        public int Health
+        {
+            get { return health; }
+            private set { health = Mathf.Max(0, value); }
+        }
+
+        public BossStats(int fireballDamage, int iceBlastDamage, int thunderboltDamage, int initialHealth)
+        {
+            DamageRoar = damageRoar;
+            DamageSideRay = damageSideRay;
+            DamageInsideRay = damageInsideRay;
+            Health = initialHealth;
+        }
+    }
 }
 
