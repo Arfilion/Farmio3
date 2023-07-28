@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Side : MonoBehaviour
 {
@@ -14,5 +15,12 @@ public class Side : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player")) 
+        {
+            print("lo hice");
+        }
     }
 }

@@ -37,9 +37,13 @@ public class Player : MonoBehaviour
 
     bool isPause;
 
+    /// BossEncounter
+    public int health;
+
+
     private void Awake()
     {
-
+       
         _rb = GetComponent<Rigidbody>();
         instance = this;
         ammo = 6;
@@ -89,6 +93,11 @@ public class Player : MonoBehaviour
         else
         {
             weaponModel.sharedMesh = weaponModels[3].sharedMesh;
+        }
+        if (boss.instance != null)
+        {
+            health = 100;
+            print("ahora");
         }
     }
     
@@ -168,6 +177,7 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collider)
     {
+        Center center = collider.gameObject.GetComponent<Center>();
         if (collider.gameObject.tag == "buff speed")
         {
             isSpeedBuffed = true;
@@ -186,6 +196,13 @@ public class Player : MonoBehaviour
             PickedShieldPowerUp?.Invoke();
 
         }
+        else if (collider.gameObject.tag == "buff health")
+        {
+            health += 20;
+            //PickedShieldPowerUp?.Invoke();
+
+        }
+
     }
     void Movement(float v, float h)
     {
@@ -223,5 +240,5 @@ public class Player : MonoBehaviour
         speed = enabledSpeed;
         speedRotation = enabledSpeedRot;
     }
-    
+
 }
