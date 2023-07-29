@@ -18,7 +18,13 @@ public class boss : MonoBehaviour
     [SerializeField] ListGenerator<Center> centerList = new ListGenerator<Center>();
     [SerializeField] ListGenerator<Side> sideList = new ListGenerator<Side>();
     [SerializeField] ListGenerator<Roar> roarList = new ListGenerator<Roar>();
+    [SerializeField] ListGenerator<Enrage> enrageList = new ListGenerator<Enrage>();
+    [SerializeField] ListGenerator<InnerCircle> innerCircleList = new ListGenerator<InnerCircle>();
+    [SerializeField] ListGenerator<OuterCircle> outerCircleList = new ListGenerator<OuterCircle>();
+
     public static boss instance;
+    public int health;
+    public int random;
 
     public void Awake()
     {
@@ -41,6 +47,10 @@ public class boss : MonoBehaviour
         roarList.Gatherer();
         sideList.Gatherer();
         centerList.Gatherer();
+        enrageList.Gatherer();
+        innerCircleList.Gatherer();
+        outerCircleList.Gatherer();
+
 
 
 
@@ -49,20 +59,50 @@ public class boss : MonoBehaviour
         skillDictionary.Add("Roar", () => Roar());
         skillDictionary.Add("SideRay", () => SideRay());
         skillDictionary.Add("InsideRay", () => InsideRay());
+        skillDictionary.Add("Enrage", () => Enrage());
+        skillDictionary.Add("InnerClap", () => InnerClap());
+        skillDictionary.Add("OuterClap", () => OuterClap());
+
 
         skillDictionary["Roar"].Invoke();
         skillDictionary["SideRay"].Invoke();
         skillDictionary["InsideRay"].Invoke();
+        skillDictionary["Enrage"].Invoke();
+        skillDictionary["InnerClap"].Invoke();
+        skillDictionary["OuterClap"].Invoke();
+
+
     }
     public void Update()
     {
+        RandomNumberGenerator();
+        print(casting);
         counter += Time.deltaTime;
         RotationUpdate();
-        Roar();
-        SideRay();
-        InsideRay();
         StateChecker(state);
+       
+        switch (random)
+        {
+            case 1:
+                Roar();
+                break;
+            case 2:
+                SideRay();
+                break;
+            case 3:
+                InsideRay();
+                break;
+            case 4:
+                OuterClap();
+                break;
+            case 5:
+                InnerClap();
+                break;
+            case 6:
+                Enrage();
+                break;
 
+        }
     }
 
     private void RotationUpdate()
@@ -76,56 +116,93 @@ public class boss : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
-
-    // Métodos que representan las habilidades
+   
+    public int RandomNumberGenerator()
+    {
+        if (casting == false)
+        {
+            random = UnityEngine.Random.Range(0, 7);
+        }
+        return random;
+    }
     private void Roar()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
+       
             counter = 0;
             counter += Time.deltaTime;
-            casting = true;
             state = durationRoar;
-            bossAnim.SetTrigger("Roar");
-            StartCoroutine(roarList.ActivateColliders());
-        }
+            bossAnim.SetTrigger("InsideRay");
+            StartCoroutine(roarList.ActivateColliders(durationRoar));
+        
     }
     private void SideRay()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
+        
             counter = 0;
             counter += Time.deltaTime;
-            casting = true;
             state = durationOutside;
             bossAnim.SetTrigger("SideRay");
-            StartCoroutine(sideList.ActivateColliders());
-        }
+            StartCoroutine(sideList.ActivateColliders(durationRoar));
+        
+        
     }
     private void InsideRay()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
             counter = 0;
             counter += Time.deltaTime;
-            casting = true;
             state = durationInside;
             bossAnim.SetTrigger("InsideRay");
-            StartCoroutine(centerList.ActivateColliders());
-
-
-        }
+            StartCoroutine(centerList.ActivateColliders(durationRoar));
+           
+    }
+    private void Enrage()
+    {
+        
+            counter = 0;
+            counter += Time.deltaTime;
+            state = durationInside;
+            bossAnim.SetTrigger("InsideRay");
+            StartCoroutine(enrageList.ActivateColliders(durationRoar));
+           
+    }
+   
+    private void OuterClap()
+    {
+        
+            counter = 0;
+            counter += Time.deltaTime;
+            state = durationInside;
+            bossAnim.SetTrigger("SideRay");
+            StartCoroutine(innerCircleList.ActivateColliders(durationRoar));
+                
+    }
+    private void InnerClap()
+    {
+        
+            counter = 0;
+            counter += Time.deltaTime;
+            state = durationInside;
+            bossAnim.SetTrigger("InsideRay");
+            StartCoroutine(outerCircleList.ActivateColliders(durationRoar));
+                       
     }
     public void StateChecker(float _state)
     {
         if (counter >= state)
         {
             counter = 0;
-            casting = false;
             counter += Time.deltaTime;
         }
     }
-  
+    public enum AttackSequence
+    {
+        Roar=1,
+        SideRay=2,
+        InsideRay=3,
+        InnerClap=4,
+        OuterClap=5,
+        Enrage=6
+    }
 }
 public class ListGenerator<T> where T : MonoBehaviour
 {
@@ -140,10 +217,9 @@ public class ListGenerator<T> where T : MonoBehaviour
     {
         return hitboxes;
     }
-    
-    public IEnumerator ActivateColliders()
+    public IEnumerator ActivateColliders(float duration)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(7f);
         foreach (T hitbox in hitboxes)
         {
             Collider collider = hitbox.GetComponent<Collider>();
@@ -153,17 +229,21 @@ public class ListGenerator<T> where T : MonoBehaviour
             }
 
         }
+        boss.instance.casting = true;
         yield return new WaitForSeconds(0.5f);
-
         foreach (T hitbox in hitboxes)
         {
             Collider collider = hitbox.GetComponent<Collider>();
             if (collider != null)
             {
                 collider.enabled = false;
+
             }
         }
+        yield return new WaitForSeconds(7f);
+        boss.instance.casting = false;
     }
+    
     public class BossStats
     {
         private int damageRoar;
@@ -203,5 +283,6 @@ public class ListGenerator<T> where T : MonoBehaviour
             Health = initialHealth;
         }
     }
+   
 }
 

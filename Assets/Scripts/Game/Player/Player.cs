@@ -97,7 +97,6 @@ public class Player : MonoBehaviour
         if (boss.instance != null)
         {
             health = 100;
-            print("ahora");
         }
     }
     
