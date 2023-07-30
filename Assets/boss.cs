@@ -2,14 +2,20 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+public struct Boss
+{
+    public string Name;
+    public int Health;
 
+    public Boss(string name, int health)
+    {
+        Name = name;
+        Health = health;
+    }
+}
 public class boss : MonoBehaviour
 {
     public bool casting;
-    public float durationRoar;
-    public float durationInside;
-    public float durationOutside;
-    public float counter;
     public float state;
     public Transform player;
     public float rotationSpeed = 2f;
@@ -20,7 +26,6 @@ public class boss : MonoBehaviour
     [SerializeField] ListGenerator<Roar> roarList = new ListGenerator<Roar>();
     [SerializeField] ListGenerator<Enrage> enrageList = new ListGenerator<Enrage>();
     [SerializeField] ListGenerator<InnerCircle> innerCircleList = new ListGenerator<InnerCircle>();
-    [SerializeField] ListGenerator<OuterCircle> outerCircleList = new ListGenerator<OuterCircle>();
 
     public static boss instance;
     public int health;
@@ -28,6 +33,7 @@ public class boss : MonoBehaviour
 
     public void Awake()
     {
+
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -36,10 +42,11 @@ public class boss : MonoBehaviour
         {
             instance = this;
         }
-        durationRoar = 11f;
-        durationInside = 6.66f;
-        durationOutside = 7f;
+        RandomNumberGenerator();
         casting = false;
+        Boss boss = new Boss("Boss",100);
+        health = boss.Health;
+        name = boss.Name;
     }
     public void Start()
     {
@@ -49,7 +56,6 @@ public class boss : MonoBehaviour
         centerList.Gatherer();
         enrageList.Gatherer();
         innerCircleList.Gatherer();
-        outerCircleList.Gatherer();
 
 
 
@@ -61,44 +67,32 @@ public class boss : MonoBehaviour
         skillDictionary.Add("InsideRay", () => InsideRay());
         skillDictionary.Add("Enrage", () => Enrage());
         skillDictionary.Add("InnerClap", () => InnerClap());
-        skillDictionary.Add("OuterClap", () => OuterClap());
 
 
-        skillDictionary["Roar"].Invoke();
-        skillDictionary["SideRay"].Invoke();
-        skillDictionary["InsideRay"].Invoke();
-        skillDictionary["Enrage"].Invoke();
-        skillDictionary["InnerClap"].Invoke();
-        skillDictionary["OuterClap"].Invoke();
+        
 
 
     }
     public void Update()
     {
-        RandomNumberGenerator();
         print(casting);
-        counter += Time.deltaTime;
         RotationUpdate();
-        StateChecker(state);
        
         switch (random)
         {
-            case 1:
+            case 0:
                 Roar();
                 break;
-            case 2:
+            case 1:
                 SideRay();
                 break;
-            case 3:
+            case 2:
                 InsideRay();
-                break;
-            case 4:
-                OuterClap();
-                break;
-            case 5:
+                break;            
+            case 3:
                 InnerClap();
                 break;
-            case 6:
+            case 4:
                 Enrage();
                 break;
 
@@ -121,87 +115,81 @@ public class boss : MonoBehaviour
     {
         if (casting == false)
         {
-            random = UnityEngine.Random.Range(0, 7);
+            if (health > 10)
+            {
+                random = UnityEngine.Random.Range(0, 3);
+                print(random);
+            }
+            else
+            {
+                random = 4;
+            }
+            
         }
         return random;
     }
     private void Roar()
     {
+        if (casting == false)
+        {
        
-            counter = 0;
-            counter += Time.deltaTime;
-            state = durationRoar;
-            bossAnim.SetTrigger("InsideRay");
-            StartCoroutine(roarList.ActivateColliders(durationRoar));
+            bossAnim.SetTrigger("Roar");
+            StartCoroutine(roarList.ActivateColliders());
+
+        }
         
     }
     private void SideRay()
     {
+        if (casting == false)
+        {
         
-            counter = 0;
-            counter += Time.deltaTime;
-            state = durationOutside;
             bossAnim.SetTrigger("SideRay");
-            StartCoroutine(sideList.ActivateColliders(durationRoar));
+            StartCoroutine(sideList.ActivateColliders());
+        }
         
         
     }
     private void InsideRay()
     {
-            counter = 0;
-            counter += Time.deltaTime;
-            state = durationInside;
+        if (casting == false)
+        {
+      
             bossAnim.SetTrigger("InsideRay");
-            StartCoroutine(centerList.ActivateColliders(durationRoar));
+            StartCoroutine(centerList.ActivateColliders());
+        }
            
     }
     private void Enrage()
     {
-        
-            counter = 0;
-            counter += Time.deltaTime;
-            state = durationInside;
-            bossAnim.SetTrigger("InsideRay");
-            StartCoroutine(enrageList.ActivateColliders(durationRoar));
+        if (casting == false )
+        {
+       
+            bossAnim.SetTrigger("Enrage");
+            //StartCoroutine(enrageList.ActivateColliders());
+        }
            
     }
    
-    private void OuterClap()
-    {
-        
-            counter = 0;
-            counter += Time.deltaTime;
-            state = durationInside;
-            bossAnim.SetTrigger("SideRay");
-            StartCoroutine(innerCircleList.ActivateColliders(durationRoar));
-                
-    }
+   
     private void InnerClap()
     {
-        
-            counter = 0;
-            counter += Time.deltaTime;
-            state = durationInside;
-            bossAnim.SetTrigger("InsideRay");
-            StartCoroutine(outerCircleList.ActivateColliders(durationRoar));
+        if (casting == false)
+        {
+  
+            bossAnim.SetTrigger("InnerClap");
+            //StartCoroutine(outerCircleList.ActivateColliders());
+        }
                        
     }
-    public void StateChecker(float _state)
-    {
-        if (counter >= state)
-        {
-            counter = 0;
-            counter += Time.deltaTime;
-        }
-    }
+    
     public enum AttackSequence
     {
         Roar=1,
         SideRay=2,
         InsideRay=3,
         InnerClap=4,
-        OuterClap=5,
-        Enrage=6
+        Enrage=5
     }
 }
 public class ListGenerator<T> where T : MonoBehaviour
@@ -217,9 +205,8 @@ public class ListGenerator<T> where T : MonoBehaviour
     {
         return hitboxes;
     }
-    public IEnumerator ActivateColliders(float duration)
+    public IEnumerator ActivateColliders()
     {
-        yield return new WaitForSeconds(7f);
         foreach (T hitbox in hitboxes)
         {
             Collider collider = hitbox.GetComponent<Collider>();
@@ -229,8 +216,7 @@ public class ListGenerator<T> where T : MonoBehaviour
             }
 
         }
-        boss.instance.casting = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(7f);
         foreach (T hitbox in hitboxes)
         {
             Collider collider = hitbox.GetComponent<Collider>();
@@ -240,49 +226,10 @@ public class ListGenerator<T> where T : MonoBehaviour
 
             }
         }
-        yield return new WaitForSeconds(7f);
-        boss.instance.casting = false;
     }
+
     
-    public class BossStats
-    {
-        private int damageRoar;
-        private int damageSideRay;
-        private int damageInsideRay;
-        private int health;
 
-        public int DamageRoar
-        {
-            get { return damageRoar; }
-            private set { damageRoar = Mathf.Max(0, value); }
-        }
 
-        public int DamageSideRay
-        {
-            get { return damageSideRay; }
-            private set { damageSideRay = Mathf.Max(0, value); }
-        }
-
-        public int DamageInsideRay
-        {
-            get { return damageInsideRay; }
-            private set { damageInsideRay = Mathf.Max(0, value); }
-        }
-
-        public int Health
-        {
-            get { return health; }
-            private set { health = Mathf.Max(0, value); }
-        }
-
-        public BossStats(int fireballDamage, int iceBlastDamage, int thunderboltDamage, int initialHealth)
-        {
-            DamageRoar = damageRoar;
-            DamageSideRay = damageSideRay;
-            DamageInsideRay = damageInsideRay;
-            Health = initialHealth;
-        }
-    }
-   
 }
 

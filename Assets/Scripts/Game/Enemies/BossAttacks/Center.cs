@@ -27,9 +27,7 @@ public class Center : MonoBehaviour
 
     public void DoLogic()
     {
-        print(Player.instance.health);
 
         Player.instance.health -= 10;
-        print(Player.instance.health);
     }
 }
