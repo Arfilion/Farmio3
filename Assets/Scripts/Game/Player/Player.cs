@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
         instance = this;
         ammo = 6;
         weaponCode = 0;
-        print(weaponCode);
         speed = 10;
         enabledSpeed = speed;
         enabledForceJump = forceJump;
@@ -61,7 +60,6 @@ public class Player : MonoBehaviour
         shieldBuffCounter = 0;
         strike strikeDamage = strikePrefab.GetComponent<strike>();
         strikeDamage.damage = 50;
-        print(strikeDamage);
         Poison poisonDamage = poisonPrefab.GetComponent<Poison>();
         poisonDamage.damage = 7;
         Bullet bulletDamage = bulletPrefab.GetComponent<Bullet>();
