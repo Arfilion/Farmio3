@@ -1,27 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1101 &-7336614314470995991
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 8401620720304763662}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.9292453
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &-7059097094815741902
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -39,9 +17,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 13.911367
   m_TransitionOffset: 0
-  m_ExitTime: 0.96651787
+  m_ExitTime: 0.32550615
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -59,20 +37,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303d934db2dc7d14ca1f7232b80606f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1102 &-3128407735288019647
+--- !u!1102 &-3066603458698109040
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: InncerClap
-  m_Speed: 0.5
+  m_Name: InnerClap
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -7336614314470995991}
+  - {fileID: 303407633173868614}
   m_StateMachineBehaviours:
-  - {fileID: 3781574554936643441}
+  - {fileID: 2936209584067605295}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -81,7 +59,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: c6b93ca9530a3e149aa43b487f9d9b3d, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: e4e0fc556f3dc8840982734589ad6373, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -126,6 +104,31 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.9537037
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-2757656940085941597
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: InnerClap
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -3066603458698109040}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.24999881
+  m_TransitionOffset: 0
+  m_ExitTime: 0.31132853
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -195,37 +198,37 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: InsideRay
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: SideRay
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: float
     m_Type: 1
     m_DefaultFloat: 1.4
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Enrage
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: InnerClap
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -251,6 +254,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be867f3a36318624fa8a2bb47bd26cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1101 &303407633173868614
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 8401620720304763662}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.8770492
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &719905016153497812
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -288,32 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303d934db2dc7d14ca1f7232b80606f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1101 &2050327248249859409
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: InnerClap
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -3128407735288019647}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.96651787
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!114 &3781574554936643441
+--- !u!114 &2936209584067605295
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -354,7 +354,7 @@ AnimatorStateMachine:
     m_Position: {x: 610, y: -210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2566669449269137820}
-    m_Position: {x: 750, y: -160, z: 0}
+    m_Position: {x: 760, y: -160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5694228380247632523}
     m_Position: {x: 260, y: -210, z: 0}
@@ -362,8 +362,8 @@ AnimatorStateMachine:
     m_State: {fileID: 8027226722166279215}
     m_Position: {x: 440, y: -160, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -3128407735288019647}
-    m_Position: {x: 160, y: -160, z: 0}
+    m_State: {fileID: -3066603458698109040}
+    m_Position: {x: 120, y: -130, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -488,7 +488,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Enrage
-  m_Speed: 0.05
+  m_Speed: 0.1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2822095709107005158}
@@ -535,7 +535,7 @@ AnimatorState:
   - {fileID: 6111311611234112617}
   - {fileID: 6156164575534695410}
   - {fileID: -7059097094815741902}
-  - {fileID: 2050327248249859409}
+  - {fileID: -2757656940085941597}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0

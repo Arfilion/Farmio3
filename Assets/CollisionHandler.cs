@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Roar : MonoBehaviour
+public class CollisionHandler : MonoBehaviour
 {
-    [SerializeField] ParticleSystem VFX;
+    [SerializeField] GameObject VFX;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        VFX.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-
 
     }
     private void OnCollisionEnter(Collision collision)
@@ -24,5 +23,4 @@ public class Roar : MonoBehaviour
         {
         }
     }
-
 }

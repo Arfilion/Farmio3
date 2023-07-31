@@ -238,4 +238,14 @@ public class Player : MonoBehaviour
         speedRotation = enabledSpeedRot;
     }
 
+    public Vector3 GetPosition()
+    {
+        return this.transform.position;
+    }
+
+    public void SetPosition(Vector3 newPosition)
+    {
+        this.transform.position = newPosition;
+    }
+
 }
