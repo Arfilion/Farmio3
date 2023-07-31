@@ -16,24 +16,21 @@ public struct Boss
 public class boss : MonoBehaviour
 {
     public bool casting;
-    public float state;
-    public Transform player;
-    public float rotationSpeed = 2f;
+    public Player player;
+    private float rotationSpeed = 2f;
     [SerializeField] Animator bossAnim;
-    public List<GameObject> prefabList = new List<GameObject>();
     [SerializeField] ListGenerator<Center> centerList = new ListGenerator<Center>();
     [SerializeField] ListGenerator<Side> sideList = new ListGenerator<Side>();
     [SerializeField] ListGenerator<Roar> roarList = new ListGenerator<Roar>();
     [SerializeField] ListGenerator<Enrage> enrageList = new ListGenerator<Enrage>();
     [SerializeField] ListGenerator<InnerCircle> innerCircleList = new ListGenerator<InnerCircle>();
-
+    public float distance;
     public static boss instance;
     public int health;
     public int random;
 
     public void Awake()
     {
-
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -42,39 +39,32 @@ public class boss : MonoBehaviour
         {
             instance = this;
         }
-        RandomNumberGenerator();
         casting = false;
         Boss boss = new Boss("Boss",100);
         health = boss.Health;
         name = boss.Name;
-    }
-    public void Start()
-    {
-
+        distance= Vector3.Distance(transform.position, player.transform.position);
         roarList.Gatherer();
         sideList.Gatherer();
         centerList.Gatherer();
         enrageList.Gatherer();
         innerCircleList.Gatherer();
-
-
-
-
         Dictionary<string, Action> skillDictionary = new Dictionary<string, Action>();
-
         skillDictionary.Add("Roar", () => Roar());
         skillDictionary.Add("SideRay", () => SideRay());
         skillDictionary.Add("InsideRay", () => InsideRay());
         skillDictionary.Add("Enrage", () => Enrage());
         skillDictionary.Add("InnerClap", () => InnerClap());
 
-
-        
-
+        RandomNumberGenerator();
+    }
+    public void Start()
+    {
 
     }
     public void Update()
     {
+        distance = Vector3.Distance(transform.position, player.transform.position);
         print(casting);
         RotationUpdate();
        
@@ -103,7 +93,7 @@ public class boss : MonoBehaviour
     {
         if (casting == false)
         {
-            Vector3 directionToPlayer = player.position - transform.position;
+            Vector3 directionToPlayer = player.transform.position - transform.position;
 
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
@@ -113,19 +103,34 @@ public class boss : MonoBehaviour
    
     public int RandomNumberGenerator()
     {
-        if (casting == false)
+        if (casting == false )
         {
-            if (health > 10)
+            if (distance < 25)
             {
-                random = UnityEngine.Random.Range(0, 3);
-                print(random);
+                if (health > 10)
+                {
+                    random = 3;
+                }
+                else if (health<10)
+                {
+                    random = 4;
+                }
             }
-            else
+            else if (distance >= 25)
             {
-                random = 4;
-            }
+                if (health > 10 )
+                {
+                    random = UnityEngine.Random.Range(0, 3);
+                    print(random);
+                }
+                else
+                {
+                    random = 4;
+                }
+            }           
             
         }
+        print(random);
         return random;
     }
     private void Roar()
@@ -135,6 +140,10 @@ public class boss : MonoBehaviour
        
             bossAnim.SetTrigger("Roar");
             StartCoroutine(roarList.ActivateColliders());
+            foreach(Roar item in roarList.hitboxes)
+            {
+                item.GetComponentInChildren<ParticleSystem>().Play();
+            }
 
         }
         
@@ -146,6 +155,10 @@ public class boss : MonoBehaviour
         
             bossAnim.SetTrigger("SideRay");
             StartCoroutine(sideList.ActivateColliders());
+            foreach (Side item in sideList.hitboxes)
+            {
+                item.GetComponentInChildren<ParticleSystem>().Play();
+            }
         }
         
         
@@ -157,7 +170,12 @@ public class boss : MonoBehaviour
       
             bossAnim.SetTrigger("InsideRay");
             StartCoroutine(centerList.ActivateColliders());
+            foreach (Center item in centerList.hitboxes)
+            {
+                item.GetComponentInChildren<ParticleSystem>().Play();
+            }
         }
+
            
     }
     private void Enrage()
@@ -166,7 +184,11 @@ public class boss : MonoBehaviour
         {
        
             bossAnim.SetTrigger("Enrage");
-            //StartCoroutine(enrageList.ActivateColliders());
+            StartCoroutine(enrageList.ActivateColliders());     
+            foreach (Enrage item in enrageList.hitboxes)
+            {
+                item.GetComponentInChildren<ParticleSystem>().Play();
+            }
         }
            
     }
@@ -178,19 +200,12 @@ public class boss : MonoBehaviour
         {
   
             bossAnim.SetTrigger("InnerClap");
-            //StartCoroutine(outerCircleList.ActivateColliders());
+            StartCoroutine(innerCircleList.ActivateColliders());
         }
                        
     }
     
-    public enum AttackSequence
-    {
-        Roar=1,
-        SideRay=2,
-        InsideRay=3,
-        InnerClap=4,
-        Enrage=5
-    }
+    
 }
 public class ListGenerator<T> where T : MonoBehaviour
 {
@@ -205,6 +220,7 @@ public class ListGenerator<T> where T : MonoBehaviour
     {
         return hitboxes;
     }
+    
     public IEnumerator ActivateColliders()
     {
         foreach (T hitbox in hitboxes)
@@ -226,10 +242,6 @@ public class ListGenerator<T> where T : MonoBehaviour
 
             }
         }
-    }
-
-    
-
-
+    } 
 }
 

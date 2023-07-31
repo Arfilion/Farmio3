@@ -13,6 +13,10 @@ TagManager:
   - buff damage
   - buff shield
   - spotLight
+  - Roar
+  - Center
+  - Left box
+  - Right box
   layers:
   - Default
   - TransparentFX

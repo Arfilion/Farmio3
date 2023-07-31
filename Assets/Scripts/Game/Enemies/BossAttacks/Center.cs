@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class Center : MonoBehaviour
 {
-    public bool isHit;
+    [SerializeField] ParticleSystem VFX;
+
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+
     }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            DoLogic();
-
         }
     }
 
-    public void DoLogic()
-    {
 
-        Player.instance.health -= 10;
-    }
 }
