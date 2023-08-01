@@ -1397,6 +1397,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warrok W Kurniawan (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 684dedafb4219a143b7476553ccad805, type: 3}
+      propertyPath: m_TagString
+      value: enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 684dedafb4219a143b7476553ccad805, type: 3}
 --- !u!4 &64975064 stripped
@@ -1601,7 +1605,7 @@ MonoBehaviour:
   timeText: {fileID: 35703528}
   seconds: 0
   minutes: 0
-  hours: 8
+  hours: 19
   isNight: 0
   dayFinish: 0
   light: {fileID: 705507994}
@@ -15344,6 +15348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59373e0436dbd2a43b61d705636c3fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   casting: 0
   player: {fileID: 2081399625}
   bossAnim: {fileID: 64975066}

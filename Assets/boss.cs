@@ -5,19 +5,24 @@ using UnityEngine;
 public struct Boss
 {
     public string Name;
+    public int Damage;
+    public float RotationSpeed;
     public int Health;
 
-    public Boss(string name, int health)
+    public Boss(string name, int damage, float rotationSpeed, int health)
     {
         Name = name;
+        Damage = damage;
+        RotationSpeed = rotationSpeed;
         Health = health;
     }
 }
 public class boss : MonoBehaviour
 {
+    public int damage;
     public bool casting;
     public Player player;
-    private float rotationSpeed = 2f;
+    private float rotationSpeed;
     [SerializeField] Animator bossAnim;
     [SerializeField] ListGenerator<Center> centerList = new ListGenerator<Center>();
     [SerializeField] ListGenerator<Side> sideList = new ListGenerator<Side>();
@@ -40,9 +45,12 @@ public class boss : MonoBehaviour
             instance = this;
         }
         casting = false;
-        Boss boss = new Boss("Boss",100);
+        Boss boss = new Boss("Boss",10,2f,100);
         health = boss.Health;
         name = boss.Name;
+        rotationSpeed = boss.RotationSpeed;
+        damage = boss.Damage;
+
         distance= Vector3.Distance(transform.position, player.transform.position);
         roarList.Gatherer();
         sideList.Gatherer();
@@ -67,22 +75,22 @@ public class boss : MonoBehaviour
         distance = Vector3.Distance(transform.position, player.transform.position);
         print(casting);
         RotationUpdate();
-       
-        switch (random)
+        Attacks attacksRandom = (Attacks)random;
+        switch (attacksRandom)
         {
-            case 0:
+            case Attacks.Roar:
                 Roar();
                 break;
-            case 1:
+            case Attacks.SideRay:
                 SideRay();
                 break;
-            case 2:
+            case Attacks.InsideRay:
                 InsideRay();
-                break;            
-            case 3:
+                break;
+            case Attacks.InnerClap:
                 InnerClap();
                 break;
-            case 4:
+            case Attacks.Enrage:
                 Enrage();
                 break;
 
@@ -145,8 +153,7 @@ public class boss : MonoBehaviour
                 item.GetComponentInChildren<ParticleSystem>().Play();
             }
 
-        }
-        
+        }        
     }
     private void SideRay()
     {
@@ -204,11 +211,29 @@ public class boss : MonoBehaviour
         }
                        
     }
-    
-    
+    public void TakeDamage(int _damage)
+    {
+        
+
+            health -= _damage;
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        
+    }
+}
+public enum Attacks
+{
+    Roar=0,
+    SideRay=1,
+    InsideRay=2,
+    InnerClap=3,
+    Enrage=4
 }
 public class ListGenerator<T> where T : MonoBehaviour
 {
+     
     public List<T> hitboxes = new List<T>();
     public void Gatherer()
     {
