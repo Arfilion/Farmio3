@@ -51,10 +51,13 @@ public abstract class Interactable : MonoBehaviour
                     {
                         UIT.uiText.text = "Manten presionado [E] para regar";
                     }
+                }else if(this.tag == "StoreItem")
+                {
+                    UIT.uiText.text = "Presione [E] para comprar \n        Costo: $" + this.GetComponent<CarrotSeed>().cost;
                 }
                 else
                 {
-                    UIT.uiText.text = "Presionado [E] para interactuar";
+                    UIT.uiText.text = "Presione [E] para interactuar";
                 }
             }
         }
