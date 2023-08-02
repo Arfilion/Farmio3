@@ -26,8 +26,12 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         // Example initialization of an item
-        Item moneyItem = CreateScriptableObjectItem("Money", 200);
+        Item moneyItem = CreateScriptableObjectItem("Money", 20);
         AddItem(moneyItem);
+
+        AddItem(CreateScriptableObjectItem("Carrot",2));
+        AddItem(CreateScriptableObjectItem("Potato", 2));
+        AddItem(CreateScriptableObjectItem("Tomato", 2));
     }
 
     private void Update()
@@ -132,5 +136,27 @@ public class Inventory : MonoBehaviour
         item.itemName = name;
         item.quantity = quantity;
         return item;
+    }
+
+    public bool CanAfford(int cost)
+    {
+        return GetItemQuantity("Money") >= cost;
+    }
+
+    public void BuyItem(int cost)
+    {
+        if (CanAfford(cost))
+        {
+            RemoveItem(FindItemByName("Money"), cost);
+        }
+    }
+
+    public bool CanSell()
+    {
+        if (GetItemQuantity("Carrot") > 0 || GetItemQuantity("Tomato") > 0 || GetItemQuantity("Potato") > 0)
+        {
+            return true;
+        }
+        return false;
     }
 }
