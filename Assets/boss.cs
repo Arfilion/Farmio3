@@ -29,10 +29,14 @@ public class boss : MonoBehaviour
     [SerializeField] ListGenerator<Roar> roarList = new ListGenerator<Roar>();
     [SerializeField] ListGenerator<Enrage> enrageList = new ListGenerator<Enrage>();
     [SerializeField] ListGenerator<InnerCircle> innerCircleList = new ListGenerator<InnerCircle>();
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject strikePrefab;
+    [SerializeField] GameObject poisonPrefab;
     public float distance;
     public static boss instance;
     public int health;
     public int random;
+    
 
     public void Awake()
     {
@@ -45,13 +49,13 @@ public class boss : MonoBehaviour
             instance = this;
         }
         casting = false;
-        Boss boss = new Boss("Boss",10,2f,100);
+        Boss boss = new Boss("Boss", 10, 2f, 100);
         health = boss.Health;
         name = boss.Name;
         rotationSpeed = boss.RotationSpeed;
         damage = boss.Damage;
 
-        distance= Vector3.Distance(transform.position, player.transform.position);
+        distance = Vector3.Distance(transform.position, player.transform.position);
         roarList.Gatherer();
         sideList.Gatherer();
         centerList.Gatherer();
@@ -108,10 +112,10 @@ public class boss : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
-   
+
     public int RandomNumberGenerator()
     {
-        if (casting == false )
+        if (casting == false)
         {
             if (distance < 25)
             {
@@ -119,14 +123,14 @@ public class boss : MonoBehaviour
                 {
                     random = 3;
                 }
-                else if (health<10)
+                else if (health < 10)
                 {
                     random = 4;
                 }
             }
             else if (distance >= 25)
             {
-                if (health > 10 )
+                if (health > 10)
                 {
                     random = UnityEngine.Random.Range(0, 3);
                     print(random);
@@ -135,8 +139,8 @@ public class boss : MonoBehaviour
                 {
                     random = 4;
                 }
-            }           
-            
+            }
+
         }
         print(random);
         return random;
@@ -145,21 +149,21 @@ public class boss : MonoBehaviour
     {
         if (casting == false)
         {
-       
+
             bossAnim.SetTrigger("Roar");
             StartCoroutine(roarList.ActivateColliders());
-            foreach(Roar item in roarList.hitboxes)
+            foreach (Roar item in roarList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
             }
 
-        }        
+        }
     }
     private void SideRay()
     {
         if (casting == false)
         {
-        
+
             bossAnim.SetTrigger("SideRay");
             StartCoroutine(sideList.ActivateColliders());
             foreach (Side item in sideList.hitboxes)
@@ -167,14 +171,14 @@ public class boss : MonoBehaviour
                 item.GetComponentInChildren<ParticleSystem>().Play();
             }
         }
-        
-        
+
+
     }
     private void InsideRay()
     {
         if (casting == false)
         {
-      
+
             bossAnim.SetTrigger("InsideRay");
             StartCoroutine(centerList.ActivateColliders());
             foreach (Center item in centerList.hitboxes)
@@ -183,43 +187,40 @@ public class boss : MonoBehaviour
             }
         }
 
-           
+
     }
     private void Enrage()
     {
-        if (casting == false )
+        if (casting == false)
         {
-       
+
             bossAnim.SetTrigger("Enrage");
-            StartCoroutine(enrageList.ActivateColliders());     
+            StartCoroutine(enrageList.ActivateColliders());
             foreach (Enrage item in enrageList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
             }
         }
-           
+
     }
-   
-   
+
+
     private void InnerClap()
     {
         if (casting == false)
         {
-  
+
             bossAnim.SetTrigger("InnerClap");
             StartCoroutine(innerCircleList.ActivateColliders());
         }
-                       
+
     }
+  
     public void TakeDamage(int _damage)
     {
-        
 
-            health -= _damage;
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
+
+        
         
     }
 }

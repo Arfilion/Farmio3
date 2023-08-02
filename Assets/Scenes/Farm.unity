@@ -15352,6 +15352,9 @@ MonoBehaviour:
   casting: 0
   player: {fileID: 2081399625}
   bossAnim: {fileID: 64975066}
+  bulletPrefab: {fileID: 7490421401051461209, guid: 9edd614c5eae8fa41ba578fd00c09716, type: 3}
+  strikePrefab: {fileID: 6304533135024026218, guid: 9437c88a57b33b44fa154d57024d95fb, type: 3}
+  poisonPrefab: {fileID: 4934724003939711232, guid: 96fafd1adf25e4e4f8bbbbba236af432, type: 3}
   distance: 0
   health: 0
   random: 0
