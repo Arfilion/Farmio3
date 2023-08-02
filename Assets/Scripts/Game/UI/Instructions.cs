@@ -16,7 +16,7 @@ public class Instructions : MonoBehaviour
         {
             instructionsImg.enabled = true;
             instructionsOnText.enabled = true;
-            instructionsOnText.text = "Instrucciones: \n1.- Agarra las semillas y plantalas \n2.- Agarra el cubo para regarlas \n" +
+            instructionsOnText.text = "Instrucciones: \n1.- Toma y planta las semillas \n2.- Toma el cubo para regarlas \n" +
                 "3.- Llena el cubo de agua en la canilla \n4.- Manten las plantas regadas para que crezcan \n" +
                 "5.- Cosechalas cuando esten al maximo \n6.- ¡Disfruta tus cosechas!";
             imgCd -= Time.deltaTime;
