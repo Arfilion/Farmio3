@@ -142,7 +142,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private bool CanAfford(int cost)
+    public bool CanAfford(int cost)
     {
         if(GetItemQuantity("Money") > cost)
         {

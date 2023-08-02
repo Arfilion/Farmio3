@@ -11,8 +11,15 @@ public class CarrotSeed : Interactable
 
     public override void Interact()
     {
-        CreateNewItem();
-        Inventory.instance.BuyItem(cost);
+        if (Inventory.instance.CanAfford(cost))
+        {
+            CreateNewItem();
+            Inventory.instance.BuyItem(cost);
+        }
+        else
+        {
+            UIT.uiText.text = "No tienes suficiente dinero";
+        }
     }
 
     public void CreateNewItem()
