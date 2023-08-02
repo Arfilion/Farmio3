@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Fleitas Gabriel
+
 public class SellPoint : Interactable
 {
     int interactTimes = 0;
