@@ -9,7 +9,7 @@ using System;
 
 public class enemyEntity : MonoBehaviour
 {
-    public int life;
+    public int health;
     public float speedRot, range, rangeRay, reload, counter, footstepInterval = 0.48f, walkCounter;
     public GameObject Acid;
     protected Vector3 dirEnemy,dirShoot;
@@ -25,25 +25,29 @@ public class enemyEntity : MonoBehaviour
 
 
 
-    public int Life
+    public int Health
     {
-        get { return life; }
-        set { 
-            if (life <= 100)
+        get { return health; }
+        set
+        {
+            if (value < 0)
             {
-                life = value;
+                health = 0;
             }
-            else if(life<0)
+            else if (value > 100)
             {
-                life = 0;
-        
+                health = 100;
             }
-            else if (life > 100)
+            else
             {
-                life = 100;
+                health = value;
             }
         }
+    }
 
+    public void SetHealth(int newHealth)
+    {
+        Health = newHealth;
     }
     public float Reload
     {
@@ -159,8 +163,8 @@ public class enemyEntity : MonoBehaviour
         if (canBeHit==true)
         {
 
-            life -= _damage;
-            if (life <= 0)
+            health -= _damage;
+            if (health <= 0)
             {
                 Destroy(gameObject);
             }

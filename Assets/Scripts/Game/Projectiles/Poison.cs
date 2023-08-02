@@ -25,16 +25,18 @@ public class Poison : BulletEntity
         {
             enemyEntity enemy = collider.gameObject.GetComponent<enemyEntity>();
             digger digger = enemy.GetComponentInChildren<digger>();
-            if (digger)
-            {
-                digger.Reveal();
-                digger.TakeDamage(damage);
-            }
+          
             if (enemy)
             {
+
                 enemy.TakeDamage(damage);
             }
+           
+            else if (digger)
+            {
 
+                digger.TakeDamage(damage);
+            }
             Destroy(gameObject);
         }
     }
