@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class CarrotSeed : Interactable
 {
+    //Fleitas Gabriel
     public Item itemTemplate;
-
-    [SerializeField] int blister;
+    public int cost;
 
     public override void Interact()
     {
-        InteractableUnableImg();
-        CreateNewItem();
-        Interactor.instance.Remove(this);
-        this.gameObject.SetActive(false);
+        if (Inventory.instance.CanAfford(cost))
+        {
+            CreateNewItem();
+            Inventory.instance.BuyItem(cost);
+        }
+        else
+        {
+            UIT.uiText.text = "No tienes suficiente dinero";
+        }
     }
 
     public void CreateNewItem()

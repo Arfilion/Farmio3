@@ -17,6 +17,9 @@ TagManager:
   - Center
   - Left box
   - Right box
+  - StoreItem
+  - SellPoint
+  - StoreTp
   layers:
   - Default
   - TransparentFX

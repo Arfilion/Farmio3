@@ -9,7 +9,6 @@ public abstract class Interactable : MonoBehaviour
 
     public UiText UIT;
 
-    //TP2
     public Vector3 Position { get; set; }
 
     protected virtual void Start()
@@ -22,6 +21,7 @@ public abstract class Interactable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Fleitas Gabriel
         Interactor interactor = other.GetComponent<Interactor>();
         if (other.name == "Player")
         {
@@ -50,6 +50,20 @@ public abstract class Interactable : MonoBehaviour
                     else
                     {
                         UIT.uiText.text = "Manten presionado [E] para regar";
+                    }
+                }else if (this.tag == "StoreItem")
+                {
+                    UIT.uiText.text = "Presione [E] para comprar \n        Costo: $" + this.GetComponent<CarrotSeed>().cost;
+                }
+                else if (this.tag == "SellPoint")
+                {
+                    if (Inventory.instance.CanSell())
+                    {
+                        UIT.uiText.text = "Presione [E] para vender";
+                    }
+                    else
+                    {
+                        UIT.uiText.text = "No tienes items para vender";
                     }
                 }
                 else
