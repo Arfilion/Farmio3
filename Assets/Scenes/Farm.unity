@@ -7345,9 +7345,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIT: {fileID: 0}
   hasInteract: 0
-  TomatoPrice: {fileID: 11400000, guid: 2d7a0c602c4ddf74e901e480b1929962, type: 2}
-  CarrotPrice: {fileID: 11400000, guid: a224cba8d5f81694d982985b1b7ff3c3, type: 2}
-  PotatoPrice: {fileID: 11400000, guid: 3c66cb340bd06b64696ed24dad9356a5, type: 2}
 --- !u!1001 &550955645
 PrefabInstance:
   m_ObjectHideFlags: 0

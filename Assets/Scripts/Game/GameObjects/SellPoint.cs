@@ -9,15 +9,12 @@ public class SellPoint : Interactable
     int interactTimes = 0;
     public bool hasInteract = false;
 
-    public Item TomatoPrice;
-    public Item CarrotPrice;
-    public Item PotatoPrice;
-
     private void Update()
     {
         if (hasInteract)
         {
             Player.instance.DisableMovement();
+            Item moneyItem = Inventory.instance.FindItemByName("Money");
             if (interactTimes == 1)
             {
                 UIT.uiText.text = "Presione el numero indicado: " +
@@ -30,7 +27,8 @@ public class SellPoint : Interactable
                     if (Inventory.instance.GetItemQuantity("Tomato") > 0)
                     {
                         Inventory.instance.RemoveItem(Inventory.instance.FindItemByName("Tomato"), 1);
-                        Inventory.instance.AddItem(TomatoPrice);
+                        moneyItem.quantity += 15;
+                        Inventory.instance.items[moneyItem] = moneyItem.quantity;
                     }
                     else
                     {
@@ -42,7 +40,8 @@ public class SellPoint : Interactable
                     if (Inventory.instance.GetItemQuantity("Carrot") > 0)
                     {
                         Inventory.instance.RemoveItem(Inventory.instance.FindItemByName("Carrot"), 1);
-                        Inventory.instance.AddItem(CarrotPrice);
+                        moneyItem.quantity += 7;
+                        Inventory.instance.items[moneyItem] = moneyItem.quantity;
                     }
                     else
                     {
@@ -54,7 +53,8 @@ public class SellPoint : Interactable
                     if (Inventory.instance.GetItemQuantity("Potato") > 0)
                     {
                         Inventory.instance.RemoveItem(Inventory.instance.FindItemByName("Potato"), 1);
-                        Inventory.instance.AddItem(PotatoPrice);
+                        moneyItem.quantity += 9;
+                        Inventory.instance.items[moneyItem] = moneyItem.quantity;
                     }
                     else
                     {
