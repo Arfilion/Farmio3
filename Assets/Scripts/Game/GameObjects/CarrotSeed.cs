@@ -5,15 +5,14 @@ using UnityEngine;
 public class CarrotSeed : Interactable
 {
     public Item itemTemplate;
+    public int cost;
 
     [SerializeField] int blister;
 
     public override void Interact()
     {
-        InteractableUnableImg();
         CreateNewItem();
-        Interactor.instance.Remove(this);
-        this.gameObject.SetActive(false);
+        Inventory.instance.BuyItem(cost);
     }
 
     public void CreateNewItem()

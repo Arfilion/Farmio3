@@ -133,4 +133,21 @@ public class Inventory : MonoBehaviour
         item.quantity = quantity;
         return item;
     }
+
+    public void BuyItem(int cost)
+    {
+        if (CanAfford(cost))
+        {
+            RemoveItem(FindItemByName("Money"), cost);
+        }
+    }
+
+    private bool CanAfford(int cost)
+    {
+        if(GetItemQuantity("Money") > cost)
+        {
+            return true;
+        }
+        return false;
+    }
 }
