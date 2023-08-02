@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Fleitas Gabriel
+
 public class StoreTeleport : Interactable
 {
     public Transform InsideSpawn;
@@ -9,7 +11,6 @@ public class StoreTeleport : Interactable
 
     public override void Interact()
     {
-        print(this.name);
             if(this.name == "Inside")
             {
                 Player.instance.transform.position = OutsideSpawn.position;

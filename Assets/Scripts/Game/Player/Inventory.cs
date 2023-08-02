@@ -17,6 +17,8 @@ public class Inventory : MonoBehaviour
     private float maxWaterAmount = 100f;
     private float currWaterAmount = 0f;
 
+    public TMP_Text moneyQty;
+
     private void Awake()
     {
         instance = this;
@@ -25,7 +27,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        // Example initialization of an item
+        //Gabriel Fleitas
         Item moneyItem = CreateScriptableObjectItem("Money", 20);
         AddItem(moneyItem);
 
@@ -36,6 +38,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
+        moneyQty.text = "Dinero: $" + GetItemQuantity("Money");
         if (Input.GetKeyDown(KeyCode.I))
         {
             PrintInventory();
@@ -137,6 +140,8 @@ public class Inventory : MonoBehaviour
         item.quantity = quantity;
         return item;
     }
+
+    //Fleitas Gabriel
 
     public bool CanAfford(int cost)
     {

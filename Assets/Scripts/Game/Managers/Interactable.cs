@@ -9,7 +9,6 @@ public abstract class Interactable : MonoBehaviour
 
     public UiText UIT;
 
-    //TP2
     public Vector3 Position { get; set; }
 
     protected virtual void Start()
@@ -22,6 +21,7 @@ public abstract class Interactable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Fleitas Gabriel
         Interactor interactor = other.GetComponent<Interactor>();
         if (other.name == "Player")
         {

@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class CarrotSeed : Interactable
 {
+    //Fleitas Gabriel
     public Item itemTemplate;
     public int cost;
-
-    [SerializeField] int blister;
 
     public override void Interact()
     {
