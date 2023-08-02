@@ -17,6 +17,7 @@ public struct Boss
         Health = health;
     }
 }
+
 public class boss : MonoBehaviour
 {
     public int damage;
@@ -36,7 +37,37 @@ public class boss : MonoBehaviour
     public static boss instance;
     public int health;
     public int random;
-    
+
+
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            if (value < 0)
+            {
+                health = 0;
+            }
+            else if (value > 1000)
+            {
+                health = 1000;
+            }
+            else
+            {
+                health = value;
+            }
+        }
+    }
+    public float RotationSpeed
+    {
+        get { return rotationSpeed; }
+        set { rotationSpeed = value; }
+    }
+    public int Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
 
     public void Awake()
     {
@@ -49,10 +80,11 @@ public class boss : MonoBehaviour
             instance = this;
         }
         casting = false;
-        Boss boss = new Boss("Boss", 10, 2f, 100);
-        health = boss.Health;
+        Boss boss = new Boss("Boss", 10, 2f, 1001);
+
+        Health = boss.Health;
         name = boss.Name;
-        rotationSpeed = boss.RotationSpeed;
+        RotationSpeed = boss.RotationSpeed;
         damage = boss.Damage;
 
         distance = Vector3.Distance(transform.position, player.transform.position);
@@ -215,12 +247,39 @@ public class boss : MonoBehaviour
         }
 
     }
-  
-    public void TakeDamage(int _damage)
+
+    private void OnCollisionEnter(Collision collision)
     {
+        Bullet bulletPrefab = collision.gameObject.GetComponent<Bullet>();
+        Poison poisonPrefab = collision.gameObject.GetComponent<Poison>();
+        strike strikePrefab = collision.gameObject.GetComponent<strike>();
+     
+        if (bulletPrefab)
+        {
+            TakeDamage2(20);
+        }
+        else if (poisonPrefab)
+        {
+            TakeDamage2(7);
+
+        }
+        else if (strikePrefab)
+
+        {
+            TakeDamage2(50);
+        }
 
 
+    }
+    public void TakeDamage2(int _damage)
+    {
+        print("holi1");
         
+            health -= _damage;
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
         
     }
 }
