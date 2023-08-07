@@ -13,7 +13,7 @@ public class Canilla : Interactable
     private void Update()
     {
         Bucket = Inventory.instance.FindItemByName("Bucket");
-        currentWater = Inventory.instance.GetItemQuantity("Bucket");
+        currentWater = Inventory.instance.GetItemQuantity("Water");
     }
 
     public override void Interact()

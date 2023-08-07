@@ -33,7 +33,14 @@ public abstract class Interactable : MonoBehaviour
                 {
                     if (Inventory.instance.FindItemByName("Bucket"))
                     {
-                        UIT.uiText.text = "Manten presionado [E] para llenar el balde";
+                        if (Inventory.instance.GetItemQuantity("Bucket") < 100)
+                        {
+                            UIT.uiText.text = "Manten presionado [E] para llenar el balde";
+                        }
+                        else
+                        {
+                            UIT.uiText.text = "El balde esta lleno";
+                        }
                     }
                     else
                     {

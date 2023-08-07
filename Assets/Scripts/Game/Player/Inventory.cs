@@ -56,7 +56,7 @@ public class Inventory : MonoBehaviour
         if (waterBarImage.enabled)
         {
             UpdateWaterBar();
-            waterQtyText.text = FindItemByName("Bucket").quantity + "/100";
+            waterQtyText.text = GetItemQuantity("Water") + "/100";
         }
     }
 

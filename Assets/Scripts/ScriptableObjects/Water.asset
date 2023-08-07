@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f36c4f081e4c394985952064a7a4bd5, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  itemName: Bucket
+  itemName: Water
   quantity: 2
