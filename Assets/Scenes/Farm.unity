@@ -14,12 +14,12 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.004
   m_LinearFogStart: 1
-  m_LinearFogEnd: 140
+  m_LinearFogEnd: 56.06
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -4753,7 +4753,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.25
+  m_Radius: 2.89
   m_Center: {x: 0.0000005364418, y: -0.75, z: -0.0000005662441}
 --- !u!136 &375402692
 CapsuleCollider:
@@ -7345,9 +7345,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIT: {fileID: 0}
   hasInteract: 0
-  TomatoPrice: {fileID: 11400000, guid: 2d7a0c602c4ddf74e901e480b1929962, type: 2}
-  CarrotPrice: {fileID: 11400000, guid: a224cba8d5f81694d982985b1b7ff3c3, type: 2}
-  PotatoPrice: {fileID: 11400000, guid: 3c66cb340bd06b64696ed24dad9356a5, type: 2}
 --- !u!1001 &550955645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10921,7 +10918,7 @@ GameObject:
   - component: {fileID: 823506821}
   - component: {fileID: 823506820}
   - component: {fileID: 823506819}
-  - component: {fileID: 823506818}
+  - component: {fileID: 823506822}
   m_Layer: 0
   m_Name: Tuberia (1)
   m_TagString: Untagged
@@ -10929,20 +10926,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &823506818
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823506817}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &823506819
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11010,6 +10993,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 88.088, z: 0}
+--- !u!136 &823506822
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823506817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.25
+  m_Height: 6.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.57, z: 0}
 --- !u!4 &825790175 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 481256, guid: 956bd2acf7aae244dac8fc20cf57858d, type: 3}
@@ -21254,7 +21251,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24936
+  m_Name: pb_Mesh24988
   serializedVersion: 10
   m_SubMeshes: []
   m_Shapes:
@@ -26428,7 +26425,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081399619}
   m_LocalRotation: {x: 0, y: 0.64144963, z: 0, w: 0.7671652}
-  m_LocalPosition: {x: 161.89, y: 2.23, z: 582.37}
+  m_LocalPosition: {x: 182.43, y: 2.23, z: 72.27}
   m_LocalScale: {x: 1, y: 1.79, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
