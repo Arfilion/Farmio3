@@ -95,9 +95,9 @@ public class Plant : Interactable
 
     public virtual void Irrigate()
     {
-        if (currentIrrigation < maxIrrigation && (Inventory.instance.GetItemQuantity("Bucket") > 0))
+        if (currentIrrigation < maxIrrigation && (Inventory.instance.GetItemQuantity("Water") > 0))
         {
-            Inventory.instance.RemoveItem(Inventory.instance.FindItemByName("Bucket"), 1);
+            Inventory.instance.RemoveItem(Inventory.instance.FindItemByName("Water"), 1);
             currentIrrigation += 1;
         }
     }
