@@ -20,10 +20,16 @@ public struct Boss
 
 public class boss : MonoBehaviour
 {
+    public float counter;
     public int damage;
     public bool casting;
     public Player player;
     private float rotationSpeed;
+    public float roarTimming;
+    public float insideRayTimming;
+    public float sideRayTimming;
+    public float inncerCircleTimming;
+    public float enrageTimming;
     [SerializeField] Animator bossAnim;
     [SerializeField] ListGenerator<Center> centerList = new ListGenerator<Center>();
     [SerializeField] ListGenerator<Side> sideList = new ListGenerator<Side>();
@@ -86,7 +92,7 @@ public class boss : MonoBehaviour
         name = boss.Name;
         RotationSpeed = boss.RotationSpeed;
         damage = boss.Damage;
-
+        counter = 0;
         distance = Vector3.Distance(transform.position, player.transform.position);
         roarList.Gatherer();
         sideList.Gatherer();
@@ -108,8 +114,8 @@ public class boss : MonoBehaviour
     }
     public void Update()
     {
+        print(counter);
         distance = Vector3.Distance(transform.position, player.transform.position);
-        print(casting);
         RotationUpdate();
         Attacks attacksRandom = (Attacks)random;
         switch (attacksRandom)
@@ -175,15 +181,16 @@ public class boss : MonoBehaviour
 
         }
         print(random);
+        counter = 0;
+
         return random;
     }
     private void Roar()
     {
         if (casting == false)
         {
-
             bossAnim.SetTrigger("Roar");
-            StartCoroutine(roarList.ActivateColliders());
+            roarList.ActivateColliders();
             foreach (Roar item in roarList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
@@ -195,9 +202,8 @@ public class boss : MonoBehaviour
     {
         if (casting == false)
         {
-
             bossAnim.SetTrigger("SideRay");
-            StartCoroutine(sideList.ActivateColliders());
+            sideList.ActivateColliders();
             foreach (Side item in sideList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
@@ -208,15 +214,21 @@ public class boss : MonoBehaviour
     }
     private void InsideRay()
     {
+        counter += Time.deltaTime;
         if (casting == false)
         {
-
             bossAnim.SetTrigger("InsideRay");
-            StartCoroutine(centerList.ActivateColliders());
+            if (counter >= insideRayTimming)
+            {
+                StartCoroutine(centerList.ActivateColliders());
+            }
             foreach (Center item in centerList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
             }
+            
+            
+            
         }
 
 
@@ -225,9 +237,8 @@ public class boss : MonoBehaviour
     {
         if (casting == false)
         {
-
             bossAnim.SetTrigger("Enrage");
-            StartCoroutine(enrageList.ActivateColliders());
+            enrageList.ActivateColliders();
             foreach (Enrage item in enrageList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
@@ -241,9 +252,8 @@ public class boss : MonoBehaviour
     {
         if (casting == false)
         {
-
             bossAnim.SetTrigger("InnerClap");
-            StartCoroutine(innerCircleList.ActivateColliders());
+            innerCircleList.ActivateColliders();
         }
 
     }
@@ -273,7 +283,6 @@ public class boss : MonoBehaviour
     }
     public void TakeDamage2(int _damage)
     {
-        print("holi1");
         
             health -= _damage;
             if (health <= 0)
@@ -308,25 +317,34 @@ public class ListGenerator<T> where T : MonoBehaviour
     
     public IEnumerator ActivateColliders()
     {
-        foreach (T hitbox in hitboxes)
-        {
-            Collider collider = hitbox.GetComponent<Collider>();
-            if (collider != null)
+        
+            foreach (T hitbox in hitboxes)
             {
-                collider.enabled = true;
-            }
-
-        }
-        yield return new WaitForSeconds(7f);
-        foreach (T hitbox in hitboxes)
-        {
-            Collider collider = hitbox.GetComponent<Collider>();
-            if (collider != null)
-            {
-                collider.enabled = false;
+                Collider collider = hitbox.GetComponent<Collider>();
+                if (collider != null)
+                {
+                    collider.enabled = true;
+                }
 
             }
-        }
+        Debug.Log("estofunciona?");
+        yield return new WaitForSeconds(0.5f);
+            foreach (T hitbox in hitboxes)
+            {
+                Collider collider = hitbox.GetComponent<Collider>();
+                if (collider != null)
+                {
+                    collider.enabled = false;
+                }
+            }
+        boss.instance.counter = 0;
+            
+        
     } 
 }
+
+
+
+
+
 
