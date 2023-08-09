@@ -10,6 +10,7 @@ public abstract class Weapon : MonoBehaviour
     public int playerWeaponCode;
     public float reload;
     public Transform spawnPoint;
+    public ParticleSystem flush;
 
     // Start is called before the first frame update
     protected virtual void Update()
@@ -39,6 +40,14 @@ public abstract class Weapon : MonoBehaviour
                 if (Input.GetKey(KeyCode.Mouse0) && DayNightCycle.instance.isNight == true)
                 {
                     DoLogic();
+                }
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    flush.Play();
+                }
+                if (Input.GetKeyUp(KeyCode.Mouse0))
+                {
+                    flush.Stop();
                 }
                 break;
         }        
