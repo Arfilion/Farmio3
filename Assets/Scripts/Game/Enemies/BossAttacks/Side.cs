@@ -23,7 +23,7 @@ public class Side : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            print("impact4");
+            Player.instance.TakeDamage();
 
         }
     }
