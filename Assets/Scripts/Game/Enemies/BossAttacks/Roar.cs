@@ -22,7 +22,7 @@ public class Roar : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            print("impact3");
+            Player.instance.TakeDamage();
 
         }
     }

@@ -8,7 +8,7 @@ public class InnerCircle : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            print("impact5");
+            Player.instance.TakeDamage();
 
         }
     }

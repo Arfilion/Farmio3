@@ -23,7 +23,7 @@ public class Center : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            print("impact1");
+            Player.instance.TakeDamage();
 
         }
     }

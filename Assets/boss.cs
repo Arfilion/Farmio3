@@ -26,7 +26,7 @@ public class boss : MonoBehaviour
     public Player player;
     private float rotationSpeed;
     public float roarTimming;
-    public float insideRayTimming;
+    public float insideRayTimming=8f;
     public float sideRayTimming;
     public float inncerCircleTimming;
     public float enrageTimming;
@@ -54,9 +54,9 @@ public class boss : MonoBehaviour
             {
                 health = 0;
             }
-            else if (value > 1000)
+            else if (value > 5000)
             {
-                health = 1000;
+                health = 5000;
             }
             else
             {
@@ -86,7 +86,7 @@ public class boss : MonoBehaviour
             instance = this;
         }
         casting = false;
-        Boss boss = new Boss("Boss", 10, 2f, 1001);
+        Boss boss = new Boss("Boss", 10, 2f, 5001);
 
         Health = boss.Health;
         name = boss.Name;
@@ -114,7 +114,6 @@ public class boss : MonoBehaviour
     }
     public void Update()
     {
-        print(counter);
         distance = Vector3.Distance(transform.position, player.transform.position);
         RotationUpdate();
         Attacks attacksRandom = (Attacks)random;
@@ -171,7 +170,6 @@ public class boss : MonoBehaviour
                 if (health > 10)
                 {
                     random = UnityEngine.Random.Range(0, 3);
-                    print(random);
                 }
                 else
                 {
@@ -180,22 +178,27 @@ public class boss : MonoBehaviour
             }
 
         }
-        print(random);
         counter = 0;
 
         return random;
     }
     private void Roar()
     {
+        
         if (casting == false)
         {
             bossAnim.SetTrigger("Roar");
-            roarList.ActivateColliders();
             foreach (Roar item in roarList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
             }
-
+        }
+        else
+        {
+            if (counter > roarTimming)
+            {
+                StartCoroutine(roarList.ActivateColliders());
+            }
         }
     }
     private void SideRay()
@@ -203,10 +206,17 @@ public class boss : MonoBehaviour
         if (casting == false)
         {
             bossAnim.SetTrigger("SideRay");
-            sideList.ActivateColliders();
             foreach (Side item in sideList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
+            }
+        }
+        else
+        {
+            if (counter > sideRayTimming)
+            {
+                StartCoroutine(sideList.ActivateColliders());
+
             }
         }
 
@@ -214,24 +224,21 @@ public class boss : MonoBehaviour
     }
     private void InsideRay()
     {
-        counter += Time.deltaTime;
         if (casting == false)
         {
             bossAnim.SetTrigger("InsideRay");
-            if (counter >= insideRayTimming)
-            {
-                StartCoroutine(centerList.ActivateColliders());
-            }
             foreach (Center item in centerList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
             }
-            
-            
-            
         }
-
-
+        else
+        {
+            if (counter > insideRayTimming)
+            {
+                StartCoroutine(centerList.ActivateColliders());
+            }          
+        }
     }
     private void Enrage()
     {
@@ -263,22 +270,24 @@ public class boss : MonoBehaviour
         Bullet bulletPrefab = collision.gameObject.GetComponent<Bullet>();
         Poison poisonPrefab = collision.gameObject.GetComponent<Poison>();
         strike strikePrefab = collision.gameObject.GetComponent<strike>();
-     
+       
         if (bulletPrefab)
         {
-            TakeDamage2(20);
+            TakeDamage2(100);
         }
         else if (poisonPrefab)
         {
-            TakeDamage2(7);
+
+            TakeDamage2(1);
 
         }
         else if (strikePrefab)
 
         {
-            TakeDamage2(50);
+            TakeDamage2(175);
         }
 
+        print(health);
 
     }
     public void TakeDamage2(int _damage)
@@ -291,6 +300,7 @@ public class boss : MonoBehaviour
             }
         
     }
+   
 }
 public enum Attacks
 {
@@ -327,7 +337,6 @@ public class ListGenerator<T> where T : MonoBehaviour
                 }
 
             }
-        Debug.Log("estofunciona?");
         yield return new WaitForSeconds(0.5f);
             foreach (T hitbox in hitboxes)
             {
@@ -337,7 +346,6 @@ public class ListGenerator<T> where T : MonoBehaviour
                     collider.enabled = false;
                 }
             }
-        boss.instance.counter = 0;
             
         
     } 

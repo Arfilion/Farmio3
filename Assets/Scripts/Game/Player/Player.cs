@@ -38,12 +38,13 @@ public class Player : MonoBehaviour
     bool isPause;
 
     /// BossEncounter
-    public int health;
+    public float health;
 
 
     private void Awake()
     {
-       
+        
+        health = 100;        
         _rb = GetComponent<Rigidbody>();
         instance = this;
         ammo = 6;
@@ -92,10 +93,7 @@ public class Player : MonoBehaviour
         {
             weaponModel.sharedMesh = weaponModels[3].sharedMesh;
         }
-        if (boss.instance != null)
-        {
-            health = 100;
-        }
+       
     }
     
 
@@ -247,5 +245,8 @@ public class Player : MonoBehaviour
     {
         this.transform.position = newPosition;
     }
-
+    public void TakeDamage()
+    {
+        Player.instance.health -= 0.5f;
+    }
 }

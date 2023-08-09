@@ -34,7 +34,6 @@ public class Bullet : BulletEntity
 
                 enemy.TakeDamage(damage);
             }
-           
             else if (digger)
             {
 
