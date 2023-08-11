@@ -7,6 +7,7 @@ using MyGeneric;
 public class Interactor : MonoBehaviour
 {
     public static Interactor instance;
+    public AudioSource waterPump;
 
     private void Awake()
     {
@@ -32,10 +33,25 @@ public class Interactor : MonoBehaviour
             if ((nearest.name == "Canilla" || nearest.GetComponent<CarrotPlant>()) && Input.GetKey(KeyCode.E))
             {
                 nearest.Interact();
+                
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
                 nearest.Interact();
+            }
+            if(nearest.name == "Canilla" && Input.GetKeyDown(KeyCode.E))
+            {
+                if (!waterPump.isPlaying)
+                {
+                    waterPump.Play();
+                }
+            }
+            if (nearest.name == "Canilla" && Input.GetKeyUp(KeyCode.E))
+            {
+                if (waterPump.isPlaying)
+                {
+                    waterPump.Stop();
+                }
             }
         }
     }

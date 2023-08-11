@@ -14,7 +14,6 @@ public class Repellent : Weapon
         if (counter >= reload && playerWeaponCode == 2)
         {
             OnPlayerClick?.Invoke();
-
             Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
             counter = 0;
         }
