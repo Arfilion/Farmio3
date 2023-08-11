@@ -14,13 +14,6 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-======= Gabi-2.0
-  m_Fog: 1
-  m_FogColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
-=======
-  m_Fog: 0
-  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
-======= main
   m_FogMode: 1
   m_FogDensity: 0.004
   m_LinearFogStart: 1
