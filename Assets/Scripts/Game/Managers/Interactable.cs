@@ -75,7 +75,7 @@ public abstract class Interactable : MonoBehaviour
                 }
                 else
                 {
-                    UIT.uiText.text = "Presionado [E] para interactuar";
+                    UIT.uiText.text = "Presione [E] para interactuar";
                 }
             }
         }
