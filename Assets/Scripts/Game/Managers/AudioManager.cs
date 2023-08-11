@@ -29,11 +29,7 @@ public class AudioManager : MonoBehaviour
     private void Update()
     {
         actual = DayNightCycle.instance.isNight;
-        if (boss.instance != null && !isPlayingMusic)
-        {
-            PlayMusic(musicList[2]);
-        }
-        else if (DayNightCycle.instance.isNight && !isPlayingMusic)
+        if (DayNightCycle.instance.isNight && !isPlayingMusic)
         {
             PlayMusic(musicList[1]);
         }
@@ -42,6 +38,8 @@ public class AudioManager : MonoBehaviour
             PlayMusic(musicList[0]);
         }
         Verifier(actual);
+
+
     }
 
     private void PlayMusic(AudioClip musicClip)
