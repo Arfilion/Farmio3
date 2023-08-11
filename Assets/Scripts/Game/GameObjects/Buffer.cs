@@ -61,12 +61,19 @@ public class Buffer : MonoBehaviour
     }
     IEnumerator Spawn()
     {
-       
+        if (boss.instance == null)
+        {
             randomPosition = Random.Range(0, 4);
             transform.position = Positions[randomPosition].transform.position;
             yield return new WaitForSeconds(reload);
             yield return null;
-       
-       
+        }
+        else
+        {
+            randomPosition = Random.Range(0, 5);
+            transform.position = Positions[randomPosition].transform.position;
+            yield return new WaitForSeconds(reload);
+            yield return null;
+        }
     }
 }
