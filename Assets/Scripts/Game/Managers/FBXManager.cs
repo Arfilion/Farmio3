@@ -17,7 +17,6 @@ public class FBXManager : MonoBehaviour
         speed speed = FindObjectOfType<speed>();
         enhanceDamage enhancedamage = FindObjectOfType<enhanceDamage>();
         Shield shield = FindObjectOfType<Shield>();
-
         // Inventory inventory = FindObjectOfType<Inventory>();
 
         if (scythe != null)
@@ -45,11 +44,17 @@ public class FBXManager : MonoBehaviour
         {
             interactor.OnPlayerInteract += PlayInteractSound;
         }
+        
+        else
+        {
+            print("bossisnull");
+        }
         if (soil != null)
         {
             soil.OnPlayerPlant += PlayPlantSound;
         }
-    
+       
+
 
 
         /* if (inventory != null)
@@ -57,8 +62,8 @@ public class FBXManager : MonoBehaviour
              inventory.OnPlayerFill += PlayFillSound;
          }*/
     }
+    
 
-    // Update is called once per frame
 
     private void PlayProjectileSound()
     {
@@ -114,10 +119,5 @@ public class FBXManager : MonoBehaviour
 
     }
 
-    /*private void PlayFillSound()
-     {
-         AudioSource.PlayClipAtPoint(musicList[6], transform.position);  
-
-     }*/
 }
 

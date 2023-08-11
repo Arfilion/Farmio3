@@ -22,30 +22,36 @@ public class enemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        counter += Time.deltaTime;
-
-        if (counter>=reload && DayNightCycle.instance.isNight)
+        if (boss.instance == null)
         {
 
-            index= Random.Range(1, 4);
-            switch (index)
+            counter += Time.deltaTime;
+            if (counter>=reload && DayNightCycle.instance.isNight)
             {
-                case 1:
-                    Instantiate(meleeEnemyPrefab, transform.position, transform.rotation);
-                    break;
-                case 2:
-                    Instantiate(rangedEnemyPrefab, transform.position, transform.rotation);
-                    break;
-                case 3:
-                    Instantiate(diggerEnemyPrefab, transform.position, transform.rotation);
-                    break;
-                default:
-                    break;
-            }
-            counter = 0;
-        }
-        StartCoroutine(Spawn());
 
+                index= Random.Range(1, 4);
+                switch (index)
+                {
+                    case 1:
+                        Instantiate(meleeEnemyPrefab, transform.position, transform.rotation);
+                        break;
+                    case 2:
+                        Instantiate(rangedEnemyPrefab, transform.position, transform.rotation);
+                        break;
+                    case 3:
+                        Instantiate(diggerEnemyPrefab, transform.position, transform.rotation);
+                        break;
+                    default:
+                        break;
+                }
+                counter = 0;
+            }
+            StartCoroutine(Spawn());
+        }
+        else
+        {
+            print("boss spawneo");
+        }
     }
     IEnumerator Spawn()
     {

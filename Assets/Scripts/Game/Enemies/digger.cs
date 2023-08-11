@@ -17,8 +17,10 @@ public class digger : enemyEntity
     // Update is called once per frame
     void Update()
     {
-       // walkCounter += Time.deltaTime;
-
+        if (boss.instance != null)
+        {
+            Destroy(gameObject);
+        }
         counter += Time.deltaTime;
         Hit(spawnPoint);
         Checker();
@@ -42,12 +44,10 @@ public class digger : enemyEntity
     }
     public void DestroyChild()
     {
-        // Obtener el primer objeto hijo del padre
         Transform child = transform.GetChild(0);
 
         if (child != null)
         {
-            // Destruir el objeto hijo
             Destroy(child.gameObject);
         }
     }
