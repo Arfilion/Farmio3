@@ -19,10 +19,12 @@ public class Side : MonoBehaviour
         
         
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.tag == "player")
         {
+            Player.instance.TakeDamage();
+
         }
     }
 }

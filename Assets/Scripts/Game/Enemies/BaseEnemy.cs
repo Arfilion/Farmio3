@@ -22,6 +22,10 @@ public class BaseEnemy : enemyEntity
     // Update is called once per frame
     void Update()
     {
+        if (boss.instance != null)
+        {
+            Destroy(gameObject);
+        }
         counter += Time.deltaTime;
         Hit(spawnPoint);
         Checker();

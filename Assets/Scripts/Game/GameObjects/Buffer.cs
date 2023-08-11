@@ -7,6 +7,7 @@ public class Buffer : MonoBehaviour
     public GameObject speedPrefab;
     public GameObject damagePrefab;
     public GameObject shieldPrefab;
+    public GameObject healPrefab;
     private float counter;
     public float reload;
     public int index;
@@ -27,7 +28,16 @@ public class Buffer : MonoBehaviour
 
         if (counter >= reload  && DayNightCycle.instance.isNight == true)
         {
-            index = Random.Range(1, 4);
+
+            if (boss.instance == null)
+            {
+                 index = Random.Range(1, 4);
+
+            }
+            else
+            {
+                index = Random.Range(1, 5);
+            }
             switch (index)
             {
                 case 1:
@@ -39,6 +49,9 @@ public class Buffer : MonoBehaviour
                 case 3:
                     Instantiate(shieldPrefab, transform.position, transform.rotation);
                     break;
+                case 4:
+                    Instantiate(healPrefab, transform.position, transform.rotation);
+                    break;
                 default:
                     break;
             }
@@ -48,9 +61,19 @@ public class Buffer : MonoBehaviour
     }
     IEnumerator Spawn()
     {
-        randomPosition = Random.Range(0, 4);
-        transform.position = Positions[randomPosition].transform.position;
-        yield return new WaitForSeconds(reload);
-        yield return null;
+        if (boss.instance == null)
+        {
+            randomPosition = Random.Range(0, 4);
+            transform.position = Positions[randomPosition].transform.position;
+            yield return new WaitForSeconds(reload);
+            yield return null;
+        }
+        else
+        {
+            randomPosition = Random.Range(0, 5);
+            transform.position = Positions[randomPosition].transform.position;
+            yield return new WaitForSeconds(reload);
+            yield return null;
+        }
     }
 }

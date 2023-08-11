@@ -25,10 +25,8 @@ public class Bullet : BulletEntity
     {
         if (collider.gameObject.tag == "enemy")
         {
-            print("hit1");
             enemyEntity enemy = collider.gameObject.GetComponent<enemyEntity>();
             digger digger = enemy.GetComponentInChildren<digger>();
-            boss boss = collider.gameObject.GetComponent<boss>();
 
 
             if (enemy)
@@ -36,13 +34,7 @@ public class Bullet : BulletEntity
 
                 enemy.TakeDamage(damage);
             }
-            if (boss)
-            {
-                print("hit2");
-                boss.TakeDamage(damage);
-
-            }
-            if (digger)
+            else if (digger)
             {
 
                 digger.TakeDamage(damage);
