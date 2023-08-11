@@ -41,11 +41,11 @@ public abstract class Weapon : MonoBehaviour
                 {
                     DoLogic();
                 }
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Mouse0 ) && DayNightCycle.instance.isNight == true)
                 {
                     flush.Play();
                 }
-                if (Input.GetKeyUp(KeyCode.Mouse0))
+                if (Input.GetKeyUp(KeyCode.Mouse0) || DayNightCycle.instance.isNight == false)
                 {
                     flush.Stop();
                 }
