@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -34,16 +35,12 @@ public class Player : MonoBehaviour
     public event PowerUpPicker PickedSpeedPowerUp;
     public event PowerUpPicker PickedDamagePowerUp;
     public event PowerUpPicker PickedShieldPowerUp;
-
-    bool isPause;
-
-    /// BossEncounter
+    [SerializeField] GameObject Canvas;
     public float health;
 
 
     private void Awake()
     {
-        
         health = 100;        
         _rb = GetComponent<Rigidbody>();
         instance = this;
@@ -69,6 +66,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        bossSpawnedPlayerHealth.instance.BarView();
+        bossSpawned.instance.BarView();
+
         BuffHandler(isSpeedBuffed);
         BuffHandler(isShieldBuffed);
         BuffHandler(isDamageBuffed);
@@ -82,7 +82,6 @@ public class Player : MonoBehaviour
         playerAnim.SetFloat("Horizontal", h);
 
         Movement(v, h);
-        //Jump();
         SwapWeapon();
 
         if (DayNightCycle.instance.isNight)
@@ -122,7 +121,7 @@ public class Player : MonoBehaviour
     }
 
    
-    public void BuffHandler<T>(T isBuffed) //Nahuel Quesada
+    public void BuffHandler<T>(T isBuffed) 
     {
         if (isSpeedBuffed)
         {
@@ -201,9 +200,7 @@ public class Player : MonoBehaviour
     }
     void Movement(float v, float h)
     {
-        //Movimiento hacia adelante y atras
         transform.position += transform.forward * v * speed * Time.deltaTime;
-        //Movimiento hacia izquierda y derecha
         transform.position += transform.right * h * speed * Time.deltaTime;
         if ((v != 0 || h != 0) && walkCounter >= footstepInterval)
         {
@@ -214,13 +211,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    /*void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rb.AddForce(Vector3.up * forceJump, ForceMode.Impulse);
-        }
-    }*/
 
     public void DisableMovement()
     {
@@ -249,4 +239,5 @@ public class Player : MonoBehaviour
     {
         Player.instance.health -= 0.5f;
     }
+    
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public struct Boss
 {
     public string Name;
@@ -23,7 +24,7 @@ public class boss : MonoBehaviour
     public float counter;
     public int damage;
     public bool casting;
-    public Player player;
+    public bool transitionCasting;
     private float rotationSpeed;
     public float roarTimming;
     public float insideRayTimming=8f;
@@ -43,6 +44,14 @@ public class boss : MonoBehaviour
     public static boss instance;
     public int health;
     public int random;
+    public delegate void BossAttacksHandler();
+    public event BossAttacksHandler RoarSound;
+    public event BossAttacksHandler SideSound;
+    public event BossAttacksHandler InsideSound;
+    public event BossAttacksHandler EnrageSound;
+    public event BossAttacksHandler SwingSound;
+
+
 
 
     public int Health
@@ -77,6 +86,10 @@ public class boss : MonoBehaviour
 
     public void Awake()
     {
+    }
+    public void Start()
+    {
+
         if (instance != null && instance != this)
         {
             Destroy(gameObject);
@@ -85,7 +98,9 @@ public class boss : MonoBehaviour
         {
             instance = this;
         }
+        Player player = FindObjectOfType<Player>().GetComponent<Player>();
         casting = false;
+        transitionCasting = false;
         Boss boss = new Boss("Boss", 10, 2f, 5001);
 
         Health = boss.Health;
@@ -107,13 +122,14 @@ public class boss : MonoBehaviour
         skillDictionary.Add("InnerClap", () => InnerClap());
 
         RandomNumberGenerator();
-    }
-    public void Start()
-    {
 
     }
     public void Update()
     {
+        
+        
+        Player player = FindObjectOfType<Player>().GetComponent<Player>();
+
         distance = Vector3.Distance(transform.position, player.transform.position);
         RotationUpdate();
         Attacks attacksRandom = (Attacks)random;
@@ -121,18 +137,38 @@ public class boss : MonoBehaviour
         {
             case Attacks.Roar:
                 Roar();
+                if (casting != transitionCasting)
+                {
+                    transitionCasting = casting;
+                }
                 break;
             case Attacks.SideRay:
                 SideRay();
+                if (casting != transitionCasting)
+                {
+                    transitionCasting = casting;
+                }
                 break;
             case Attacks.InsideRay:
                 InsideRay();
+                if (casting != transitionCasting)
+                {
+                    transitionCasting = casting;
+                }
                 break;
             case Attacks.InnerClap:
                 InnerClap();
+                if (casting != transitionCasting)
+                {
+                    transitionCasting = casting;
+                }
                 break;
             case Attacks.Enrage:
                 Enrage();
+                if (casting != transitionCasting)
+                {
+                    transitionCasting = casting;
+                }
                 break;
 
         }
@@ -142,6 +178,8 @@ public class boss : MonoBehaviour
     {
         if (casting == false)
         {
+            Player player = FindObjectOfType<Player>().GetComponent<Player>();
+
             Vector3 directionToPlayer = player.transform.position - transform.position;
 
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
@@ -187,7 +225,9 @@ public class boss : MonoBehaviour
         
         if (casting == false)
         {
+
             bossAnim.SetTrigger("Roar");
+            
             foreach (Roar item in roarList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
@@ -197,6 +237,7 @@ public class boss : MonoBehaviour
         {
             if (counter > roarTimming)
             {
+                RoarSound?.Invoke();
                 StartCoroutine(roarList.ActivateColliders());
             }
         }
@@ -205,7 +246,8 @@ public class boss : MonoBehaviour
     {
         if (casting == false)
         {
-            bossAnim.SetTrigger("SideRay");
+
+            bossAnim.SetTrigger("SideRay");        
             foreach (Side item in sideList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
@@ -215,27 +257,30 @@ public class boss : MonoBehaviour
         {
             if (counter > sideRayTimming)
             {
+                SideSound?.Invoke();
                 StartCoroutine(sideList.ActivateColliders());
-
             }
         }
-
-
     }
     private void InsideRay()
     {
         if (casting == false)
         {
             bossAnim.SetTrigger("InsideRay");
+            
+
             foreach (Center item in centerList.hitboxes)
             {
                 item.GetComponentInChildren<ParticleSystem>().Play();
+
+
             }
         }
         else
         {
             if (counter > insideRayTimming)
             {
+                InsideSound?.Invoke();
                 StartCoroutine(centerList.ActivateColliders());
             }          
         }
@@ -245,6 +290,8 @@ public class boss : MonoBehaviour
         if (casting == false)
         {
             bossAnim.SetTrigger("Enrage");
+            
+
             enrageList.ActivateColliders();
             foreach (Enrage item in enrageList.hitboxes)
             {
@@ -260,6 +307,8 @@ public class boss : MonoBehaviour
         if (casting == false)
         {
             bossAnim.SetTrigger("InnerClap");
+       
+
             innerCircleList.ActivateColliders();
         }
 
@@ -287,7 +336,6 @@ public class boss : MonoBehaviour
             TakeDamage2(175);
         }
 
-        print(health);
 
     }
     public void TakeDamage2(int _damage)
@@ -296,7 +344,7 @@ public class boss : MonoBehaviour
             health -= _damage;
             if (health <= 0)
             {
-                Destroy(gameObject);
+            SceneManager.LoadScene(4);
             }
         
     }

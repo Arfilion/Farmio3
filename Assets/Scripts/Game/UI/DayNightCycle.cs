@@ -13,10 +13,13 @@ public class DayNightCycle : MonoBehaviour
     public static DayNightCycle instance;
 
     [SerializeField] TMP_Text timeText;
+    [SerializeField] TMP_Text contador;
     public float seconds, minutes, hours;
     public bool isNight = false;
     public bool dayFinish = false;
     private int previousHour = 23;
+    public int oleada;
+    public GameObject clock;
 
     public Light light;
     public int lightSpeedRot;
@@ -29,6 +32,7 @@ public class DayNightCycle : MonoBehaviour
 
     private void Awake()
     {
+        oleada = 0;
         instance = this;
         nightOn.enabled = false;
         nightOnText.enabled = false;
@@ -38,6 +42,7 @@ public class DayNightCycle : MonoBehaviour
     {
         DisplayTime();
         VerifyNight();
+        CountWaves();
 
         if (hours >= 18 && hours <= 23)
         {
@@ -53,6 +58,7 @@ public class DayNightCycle : MonoBehaviour
         if (FinishDay())
         {
             hours = 8;
+            oleada += 1;
         }
 
         if (isNight)
@@ -95,7 +101,20 @@ public class DayNightCycle : MonoBehaviour
         }
 
         timeText.text = string.Format("{0:00} : {1:00}", hours, minutes);
+        if (oleada == 10)
+        {
+            seconds = 0;
+            minutes = 0;
+            hours = 19;
+            clock.SetActive(false);
+        }
     }
+    void CountWaves()
+    {
+
+                contador.text = string.Format("Oleada " +(1+oleada));
+    }
+
 
     void VerifyNight()
     {

@@ -89,7 +89,7 @@ public class enemyEntity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
 
