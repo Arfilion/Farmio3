@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class digger : enemyEntity
 {
-    public SkinnedMeshRenderer renderer;
+    public  SkinnedMeshRenderer  renderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,16 +39,6 @@ public class digger : enemyEntity
     {
         canBeHit = true;
         renderer.enabled = true;
-
-        GetComponent<digger>().DestroyChild();
     }
-    public void DestroyChild()
-    {
-        Transform child = transform.GetChild(0);
-
-        if (child != null)
-        {
-            Destroy(child.gameObject);
-        }
-    }
+   
 }

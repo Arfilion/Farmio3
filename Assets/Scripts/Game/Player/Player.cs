@@ -161,7 +161,6 @@ public class Player : MonoBehaviour
                 plants = GameObject.FindGameObjectsWithTag("plant").ToList();
                 foreach (GameObject plant in plants)
                 {
-                    print("entre2");
 
                     plant.GetComponent<Plant>().inmune = false;
                 }
