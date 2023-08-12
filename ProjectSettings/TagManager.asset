@@ -20,6 +20,7 @@ TagManager:
   - StoreItem
   - SellPoint
   - StoreTp
+  - digger
   layers:
   - Default
   - TransparentFX
